@@ -1,7 +1,11 @@
+using Gif_Buddy.Interfaces;
+using Gif_Buddy.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<IGifApiService, GifApiService>();
 
 var app = builder.Build();
 
