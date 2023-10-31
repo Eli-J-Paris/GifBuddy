@@ -13,7 +13,9 @@
             <label for="url">URL: </label>
             <input class="form-control" type="text" id="url" name="Url" />
         </div>
-
+        <input type="text" id="userinput" /> 
+        <div id="output"></div>
+        <img id="userimage" src=""/>
         <div class="form-group">
             <label for="rating">Rating: </label>
             <input class="form-control" type="number" id="rating" name="Rating" />
@@ -25,3 +27,32 @@
 
     </form>
 </div>
+
+
+
+<script>
+
+    const userinput = document.getElementById('url');
+    const output = document.getElementById('output');
+    const userimage = document.getElementById('userimage');
+
+    userinput.addEventListener('input',function(){
+        const inputvalue = userinput.value;
+        output.textContent = inputvalue;
+        userimage.src = inputvalue;
+    });
+
+
+</script>
+
+
+@*
+<script>
+    $(document).ready(function () {
+        $("#url").keyup(function () {
+            // Retrieve the input field text and reset the count to zero
+            var filter = $(this).val().toLowerCase();
+
+        }
+    }
+</script>*@
