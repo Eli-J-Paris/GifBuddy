@@ -1,4 +1,11 @@
 ﻿@model List<Gif>
+@{
+    string successMsg = ViewData["Success"] as string;
+}
+@if(ViewData["Success"] != null)
+{
+    <h4>@successMsg</h4>
+}
 
 <h1>All Gifs</h1>
 @foreach(var gif in Model)

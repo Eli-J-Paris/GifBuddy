@@ -17,8 +17,32 @@ namespace Gif_Buddy.Controllers
 
             List<Gif> gifs = new List<Gif>();
             gifs = await _gifApiService.GetGifsAsync();
-            
+
+            ViewData["Success"] = TempData["Success"];
             return View(gifs);
+        }
+
+        [Route("/gifs/new")]
+        public IActionResult NewGif()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("/CreateGif")]
+        public async Task<IActionResult> CreateGif(Gif gif)
+        {
+            if(ModelState.IsValid)
+            {
+                await _gifApiService.PostGifAsync(gif.Name, gif.Url, gif.Rating);
+                TempData["Success"] = "Success!";
+
+                return Redirect("/gif");
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }
