@@ -2,24 +2,44 @@
 
 <h2 style="text-align: center;">Edit gif!</h2>
 
-<div class="gif-form">
+<div class="gif-form col-md-6 offset-lg-3 align-middle">
     <form action="/gif/@Model.Id/update" method="post">
 
         <div class="form-group">
             <label for="Name">Title: </label>
-            <input type="text" id="Name" name="Name" value="@Model.Name"/>
+            <input class="form-control" type="text" id="Name" name="Name" value="@Model.Name" />
         </div>
 
         <div class="form-group">
             <label for="url">URL: </label>
-            <input type="text" id="url" name="Url" value="@Model.Url"/>
+            <input class="form-control" type="text" id="url" name="Url" value="@Model.Url" />
         </div>
+        <input hidden type="text" id="userinput" />
+        <div hidden id="output"></div>
+        <img id="userimage" src="@Model.Url" />
 
         <div class="form-group">
             <label for="rating">Rating: </label>
-            <input type="number" id="rating" name="Rating" value="@Model.Rating"/>
+            <input class="form-control" type="number" id="rating" name="Rating" value="@Model.Rating" />
         </div>
-
-        <button type="submit">Update Gif</button>
+        <br />
+        <button type="submit" class="btn btn-lg btn-primary col-md-6 offset-lg-3 align-middle">Update Gif</button>
     </form>
+    <br />
+    <a href="/gif" class="btn btn-lg btn-danger col-md-6 offset-lg-3 align-middle">Cancel</a>
 </div>
+
+<script>
+
+    const userinput = document.getElementById('url');
+    const output = document.getElementById('output');
+    const userimage = document.getElementById('userimage');
+
+    userinput.addEventListener('input', function () {
+        const inputvalue = userinput.value;
+        output.textContent = inputvalue;
+        userimage.src = inputvalue;
+    });
+
+
+</script>
