@@ -90,5 +90,25 @@ namespace Gif_Buddy.Services
                 throw new HttpRequestException($"{response.ReasonPhrase}");
             }
         }
+
+        public async Task<bool> DeleteGifAsync(int id)
+        {
+            string apiEndpoint = $"/Gifs/{id}";
+            var gif = await FindGifByIdAsync(id);
+            var jsonGifData = JsonSerializer.Serialize(gif);
+
+            HttpContent content = new StringContent(jsonGifData, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await Client.DeleteAsync(apiEndpoint);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return response.IsSuccessStatusCode;
+            }
+            else
+            {
+                throw new HttpRequestException($"{response.ReasonPhrase}");
+            }
+
+        }
     }
 }

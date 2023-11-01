@@ -45,8 +45,9 @@ namespace Gif_Buddy.Controllers
             return View();
         }
 
-        [HttpPost]
+
         [Route("/CreateGif")]
+        [HttpPost]
         public async Task<IActionResult> CreateGif(Gif gif)
         {
             if(ModelState.IsValid)
@@ -60,6 +61,23 @@ namespace Gif_Buddy.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [Route("/gif/{id}/delete")]
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _gifApiService.DeleteGifAsync(id);
+                ViewBag.DeleteSuccess = "Your Gif was deleted";
+                return Redirect("/gif");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+
         }
     }
 }
