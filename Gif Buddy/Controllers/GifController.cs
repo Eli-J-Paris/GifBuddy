@@ -31,11 +31,13 @@ namespace Gif_Buddy.Controllers
         }
 
         [Route("/gif/{id}/update")]
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> Update(Gif gif)
         {
-
+            await _gifApiService.PutGifAsync(gif);
+            return Redirect("/gif");
         }
+
 
         [Route("/gifs/new")]
         public IActionResult NewGif()

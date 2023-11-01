@@ -78,7 +78,17 @@ namespace Gif_Buddy.Services
             string apiEndpoint = $"/Gifs/{gif.Id}";
             var jsonGifData = JsonSerializer.Serialize(gif);
 
-            HttpContent content = new StringContent(jsonGifData);
+            HttpContent content = new StringContent(jsonGifData, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await Client.PutAsync(apiEndpoint, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return response.IsSuccessStatusCode;
+            }
+            else
+            {
+                throw new HttpRequestException($"{response.ReasonPhrase}");
+            }
         }
     }
 }
