@@ -94,10 +94,7 @@ namespace Gif_Buddy.Services
         public async Task<bool> DeleteGifAsync(int id)
         {
             string apiEndpoint = $"/Gifs/{id}";
-            var gif = await FindGifByIdAsync(id);
-            var jsonGifData = JsonSerializer.Serialize(gif);
 
-            HttpContent content = new StringContent(jsonGifData, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await Client.DeleteAsync(apiEndpoint);
 
             if (response.IsSuccessStatusCode)
