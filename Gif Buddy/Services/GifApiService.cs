@@ -40,6 +40,19 @@ namespace Gif_Buddy.Services
             return result;
         }
 
+        public async Task<Gif> FindGifByIdAsync(int id)
+        {
+            var gifs = await GetGifsAsync();
+            foreach (var gif in gifs)
+            {
+                if (gif.Id == id)
+                {
+                    return gif;
+                }
+            }
+            return new Gif();
+        }
+
         public async Task<bool> PostGifAsync(string name, string url, int rating)
         {
             string apiEndpoint = "/Gifs";
@@ -52,6 +65,23 @@ namespace Gif_Buddy.Services
             HttpResponseMessage response = await Client.PostAsync(apiEndpoint, content);
             
             if(response.IsSuccessStatusCode)
+            {
+                return response.IsSuccessStatusCode;
+            }
+            else
+            {
+                throw new HttpRequestException($"{response.ReasonPhrase}");
+            }
+        }
+        public async Task<bool> PutGifAsync(Gif gif)
+        {
+            string apiEndpoint = $"/Gifs/{gif.Id}";
+            var jsonGifData = JsonSerializer.Serialize(gif);
+
+            HttpContent content = new StringContent(jsonGifData, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await Client.PutAsync(apiEndpoint, content);
+
+            if (response.IsSuccessStatusCode)
             {
                 return response.IsSuccessStatusCode;
             }

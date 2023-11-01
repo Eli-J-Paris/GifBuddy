@@ -1,4 +1,5 @@
-﻿@model List<Gif>
+﻿<link rel="stylesheet" href="/css/gifs.css" />
+@model List<Gif>
 @{
     string successMsg = ViewData["Success"] as string;
 }
@@ -7,21 +8,16 @@
     <h4>@successMsg</h4>
 }
 
-<h1>All Gifs</h1>
-<table>
-    @for (int i = 0; i < Model.Count; i += 3)
-    {
-        <tr>
-            @for (int j = i; j < i + 3 && j < Model.Count; j++)
-            {
-                <td>
-                    <img src="@Model[j].Url" alt="@Model[j].Name" style="width: 200px; height: 200px;" />
-                    <p>@Model[j].Name</p>
-                    <p>@Model[j].Rating</p>
 
-                </td>
-            }
-        </tr>
-        if (i >= 3) break; // Limit to two rows
-    }
-</table>
+<div class="bs-container">
+    <ul class="ul-gif">
+        @foreach(var e in Model)
+        {
+            <div class="li-gif">
+                <li class="gif-title">@e.Name <span class="gif-rating">@e.Rating/5</span></li>
+                <li><img class="gifs" src="@e.Url" /></li>
+            </div>
+        }
+    </ul>
+</div>
+

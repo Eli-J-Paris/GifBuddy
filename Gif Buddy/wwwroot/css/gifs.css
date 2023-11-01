@@ -1,0 +1,35 @@
+﻿.gifs {
+    height: 300px;
+    width: 300px;
+}
+
+.ul-gif {
+    list-style: none;
+    display: inline-grid;
+    grid-template-columns: 50% 50% 50%;
+}
+
+.gif-rating {
+    background-color: dimgray;
+    border: solid;
+    border-width: .5px;
+    border-color: black;
+    border-radius: 25px;
+    color: gold;
+    width: 45px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.li-gif {
+    margin-bottom: 20px;
+}
+
+.gif-title {
+    font-size: 20px;
+}
+
+.bs-container {
+}
