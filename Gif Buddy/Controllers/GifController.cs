@@ -22,6 +22,21 @@ namespace Gif_Buddy.Controllers
             return View(gifs);
         }
 
+        [Route("/gif/{id}/edit")]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var gif = await _gifApiService.FindGifByIdAsync(id);
+
+            return View(gif);
+        }
+
+        [Route("/gif/{id}/update")]
+        [HttpPut]
+        public async Task<IActionResult> Update(Gif gif)
+        {
+
+        }
+
         [Route("/gifs/new")]
         public IActionResult NewGif()
         {

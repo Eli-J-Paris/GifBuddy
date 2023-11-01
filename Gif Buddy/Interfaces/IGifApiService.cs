@@ -6,5 +6,6 @@ namespace Gif_Buddy.Interfaces
     {
         Task<List<Gif>> GetGifsAsync();
         Task<bool> PostGifAsync(string name, string url, int rating);
+        Task<Gif> FindGifByIdAsync(int id);
     }
 }

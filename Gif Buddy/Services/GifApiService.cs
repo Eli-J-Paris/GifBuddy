@@ -40,6 +40,19 @@ namespace Gif_Buddy.Services
             return result;
         }
 
+        public async Task<Gif> FindGifByIdAsync(int id)
+        {
+            var gifs = await GetGifsAsync();
+            foreach (var gif in gifs)
+            {
+                if (gif.Id == id)
+                {
+                    return gif;
+                }
+            }
+            return new Gif();
+        }
+
         public async Task<bool> PostGifAsync(string name, string url, int rating)
         {
             string apiEndpoint = "/Gifs";
@@ -59,6 +72,13 @@ namespace Gif_Buddy.Services
             {
                 throw new HttpRequestException($"{response.ReasonPhrase}");
             }
+        }
+        public async Task<bool> PutGifAsync(Gif gif)
+        {
+            string apiEndpoint = $"/Gifs/{gif.Id}";
+            var jsonGifData = JsonSerializer.Serialize(gif);
+
+            HttpContent content = new StringContent(jsonGifData);
         }
     }
 }

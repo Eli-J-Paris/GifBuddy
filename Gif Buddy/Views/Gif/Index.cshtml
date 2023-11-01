@@ -1,4 +1,5 @@
-﻿@model List<Gif>
+﻿<link rel="stylesheet" href="/css/gifs.css" />
+@model List<Gif>
 @{
     string successMsg = ViewData["Success"] as string;
 }
@@ -7,8 +8,14 @@
     <h4>@successMsg</h4>
 }
 
-<h1>All Gifs</h1>
-@foreach(var gif in Model)
-{
-    <p>@gif.Name</p>
-}
+<div class="bs-container">
+    <ul class="ul-gif">
+        @foreach(var e in Model)
+        {
+            <div class="li-gif">
+                <li class="gif-title">@e.Name <span class="gif-rating">@e.Rating/5</span></li>
+                <li><img class="gifs" src="@e.Url" /></li>
+            </div>
+        }
+    </ul>
+</div>
