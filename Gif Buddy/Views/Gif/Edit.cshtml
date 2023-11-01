@@ -1,4 +1,8 @@
-﻿@model Gif
+﻿<link rel="stylesheet" href="~/css/gifs.css" />
+@model Gif
+@{
+    string hidden = "";
+}
 
 <h2 style="text-align: center;">Edit gif!</h2>
 
@@ -16,7 +20,11 @@
         </div>
         <input hidden type="text" id="userinput" />
         <div hidden id="output"></div>
-        <img id="userimage" src="@Model.Url" />
+
+            <div style="all: unset;" class="img-div" @hidden>
+                <img id="userimage" src="@Model.Url" class="dynamic-gif" @*alt="Your Gif Will Appear Here, Paste a Link!"*@/>
+            </div>  
+        
 
         <div class="form-group">
             <label for="rating">Rating: </label>
@@ -39,10 +47,13 @@
     const output = document.getElementById('output');
     const userimage = document.getElementById('userimage');
 
+
     userinput.addEventListener('input', function () {
+    @hidden = "hidden";
         const inputvalue = userinput.value;
         output.textContent = inputvalue;
         userimage.src = inputvalue;
+        
     });
 
 
