@@ -14,7 +14,7 @@
         @foreach(var e in Model)
         {
             <div class="li-gif">
-                <li class="gif-title">@e.Name <span class="gif-rating">@e.Rating/5</span></li>
+            <li class="gif-title"><a href="/gif/@e.Id/edit">@e.Name</a><span class="gif-rating">@e.Rating/5</span></li>
                 <li><img class="gifs" src="@e.Url" /></li>
             </div>
         }
